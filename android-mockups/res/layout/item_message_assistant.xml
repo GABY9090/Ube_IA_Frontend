@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  MESSAGE ASSISTANT
+  Avatar bordeaux + nom + temps
+  Texte de réponse + boîte d'explication
+  Onglets: Résultat | Graphique | SQL
+  Tableau de résultats (scrollable horizontalement)
+  Actions: Copier, CSV, Régénérer, 👍, 👎
+  Suggestions de suivi (chips)
+
+  À placer dans: res/layout/item_message_assistant.xml
+-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp">
+
+    <!-- Avatar assistant -->
+    <FrameLayout
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:background="@drawable/bg_assistant_avatar">
+
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_gravity="center"
+            android:src="@android:drawable/btn_star_big_on"
+            android:tint="@color/white"
+            tools:ignore="UseAppTint" />
+    </FrameLayout>
+
+    <!-- Corps du message -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginStart="10dp"
+        android:orientation="vertical">
+
+        <!-- Nom + temps d'exécution -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="4dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/assistant_name"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_light_secondary" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:text="0.42s"
+                android:textSize="10sp"
+                android:textColor="@color/text_light_muted" />
+        </LinearLayout>
+
+        <!-- Texte principal de la réponse -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:textSize="14sp"
+            android:textColor="@color/text_light_primary"
+            android:lineSpacingExtra="3dp"
+            tools:text="Voici l'évolution de la mortalité cardiovasculaire en France (2014–2023)." />
+
+        <!-- Boîte d'explication -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_explain_box"
+            android:padding="12dp"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="@color/text_light_tertiary"
+                android:lineSpacingExtra="2dp"
+                tools:text="Les données montrent une baisse régulière du taux de mortalité, avec une légère remontée en 2020." />
+        </LinearLayout>
+
+        <!-- Onglets: Résultat | Graphique | SQL -->
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/result_tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            app:tabIndicatorColor="@color/bordeaux_500"
+            app:tabSelectedTextColor="@color/bordeaux_700"
+            app:tabTextColor="@color/text_light_muted"
+            app:tabIndicatorHeight="2dp"
+            app:tabMode="fixed"
+            app:tabGravity="start"
+            app:tabRippleColor="@android:color/transparent"
+            app:tabPaddingStart="14dp"
+            app:tabPaddingEnd="14dp">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tab_result" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tab_chart" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tab_sql" />
+        </com.google.android.material.tabs.TabLayout>
+
+        <!-- Contenu de l'onglet "Résultat" (tableau) -->
+        <HorizontalScrollView
+            android:id="@+id/result_table_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="horizontal">
+
+            <TableLayout
+                android:id="@+id/result_table"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_table_header"
+                android:padding="1dp">
+
+                <!-- En-tête du tableau -->
+                <TableRow
+                    android:background="@color/bg_light"
+                    android:padding="7dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:text="@string/col_year"
+                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        android:textAllCaps="true"
+                        android:textColor="@color/text_light_tertiary" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:text="@string/col_rate"
+                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        android:textAllCaps="true"
+                        android:textColor="@color/text_light_tertiary" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:text="@string/col_deaths"
+                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        android:textAllCaps="true"
+                        android:textColor="@color/text_light_tertiary" />
+                </TableRow>
+
+                <!-- Lignes de données (exemple) -->
+                <TableRow android:padding="7dp">
+                    <TextView android:text="2014" android:textSize="11sp" android:paddingStart="10dp" android:paddingEnd="10dp" android:textColor="@color/text_light_secondary" />
+                    <TextView android:text="142.3" android:textSize="11sp" android:paddingStart="10dp" android:paddingEnd="10dp" android:textColor="@color/text_light_secondary" />
+                    <TextView android:text="142 500" android:textSize="11sp" android:paddingStart="10dp" android:paddingEnd="10dp" android:textColor="@color/text_light_secondary" />
+                </TableRow>
+
+                <TableRow android:padding="7dp">
+                    <TextView android:text="2015" android:textSize="11sp" android:paddingStart="10dp" android:paddingEnd="10dp" android:textColor="@color/text_light_secondary" />
+                    <TextView android:text="138.7" android:textSize="11sp" android:paddingStart="10dp" android:paddingEnd="10dp" android:textColor="@color/text_light_secondary" />
+                    <TextView android:text="139 800" android:textSize="11sp" android:paddingStart="10dp" android:paddingEnd="10dp" android:textColor="@color/text_light_secondary" />
+                </TableRow>
+
+                <TableRow android:padding="7dp">
+                    <TextView android:text="2016" android:textSize="11sp" android:paddingStart="10dp" android:paddingEnd="10dp" android:textColor="@color/text_light_secondary" />
+                    <TextView android:text="135.2" android:textSize="11sp" android:paddingStart="10dp" android:paddingEnd="10dp" android:textColor="@color/text_light_secondary" />
+                    <TextView android:text="136 200" android:textSize="11sp" android:paddingStart="10dp" android:paddingEnd="10dp" android:textColor="@color/text_light_secondary" />
+                </TableRow>
+
+                <TableRow android:padding="7dp">
+                    <TextView android:text="2017" android:textSize="11sp" android:paddingStart="10dp" android:paddingEnd="10dp" android:textColor="@color/text_light_secondary" />
+                    <TextView android:text="132.5" android:textSize="11sp" android:paddingStart="10dp" android:paddingEnd="10dp" android:textColor="@color/text_light_secondary" />
+                    <TextView android:text="133 400" android:textSize="11sp" android:paddingStart="10dp" android:paddingEnd="10dp" android:textColor="@color/text_light_secondary" />
+                </TableRow>
+
+                <TableRow android:padding="7dp">
+                    <TextView android:text="2018" android:textSize="11sp" android:paddingStart="10dp" android:paddingEnd="10dp" android:textColor="@color/text_light_secondary" />
+                    <TextView android:text="129.8" android:textSize="11sp" android:paddingStart="10dp" android:paddingEnd="10dp" android:textColor="@color/text_light_secondary" />
+                    <TextView android:text="130 900" android:textSize="11sp" android:paddingStart="10dp" android:paddingEnd="10dp" android:textColor="@color/text_light_secondary" />
+                </TableRow>
+            </TableLayout>
+        </HorizontalScrollView>
+
+        <!-- Indication de défilement -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="6dp"
+            android:text="@string/scroll_hint"
+            android:textSize="10sp"
+            android:textColor="@color/text_light_muted"
+            android:background="@color/bg_light" />
+
+        <!-- Rangée d'actions -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="8dp">
+
+            <!-- Copier -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_ds_chip"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:layout_marginEnd="6dp"
+                android:text="@string/action_copy"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_light_tertiary"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <!-- CSV -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_ds_chip"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:layout_marginEnd="6dp"
+                android:text="@string/action_csv"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_light_tertiary"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <!-- Régénérer -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_ds_chip"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:layout_marginEnd="6dp"
+                android:text="@string/action_regenerate"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_light_tertiary"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <!-- Séparateur -->
+            <View
+                android:layout_width="1dp"
+                android:layout_height="20dp"
+                android:layout_marginEnd="6dp"
+                android:background="@color/border_light" />
+
+            <!-- Pouce levé -->
+            <ImageButton
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@android:drawable/thumb_up"
+                android:tint="@color/text_light_muted"
+                android:layout_marginEnd="4dp"
+                tools:ignore="UseAppTint" />
+
+            <!-- Pouce baissé -->
+            <ImageButton
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@android:drawable/thumb_down"
+                android:tint="@color/text_light_muted"
+                tools:ignore="UseAppTint" />
+        </LinearLayout>
+
+        <!-- Suggestions de suivi (chips) -->
+        <LinearLayout
+            android:id="@+id/followups_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:weightSum="3">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/bg_input_pill"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                android:layout_marginEnd="6dp"
+                android:text="@string/followup_1"
+                android:textSize="12sp"
+                android:textColor="@color/text_light_secondary"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/bg_input_pill"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                android:layout_marginEnd="6dp"
+                android:text="@string/followup_2"
+                android:textSize="12sp"
+                android:textColor="@color/text_light_secondary"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/bg_input_pill"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                android:text="@string/followup_3"
+                android:textSize="12sp"
+                android:textColor="@color/text_light_secondary"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:clickable="true"
+                android:focusable="true" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

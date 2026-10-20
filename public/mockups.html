@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>DataQuery AI — Maquettes Mobile</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --bordeaux-50: #fdf2f3;
+  --bordeaux-100: #fce7e9;
+  --bordeaux-200: #f9d0d5;
+  --bordeaux-300: #f0a8b2;
+  --bordeaux-400: #e06a7c;
+  --bordeaux-500: #c9374b;
+  --bordeaux-600: #a52939;
+  --bordeaux-700: #8B1A2B;
+  --bordeaux-800: #721623;
+  --bordeaux-900: #5f131e;
+  --bordeaux-950: #3d0a13;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: #eef2f7;
+  color: #0f172a;
+  -webkit-font-smoothing: antialiased;
+}
+.page-header {
+  text-align: center;
+  padding: 40px 20px 30px;
+}
+.page-header h1 { font-size: 28px; font-weight: 700; color: #1e293b; }
+.page-header p { font-size: 15px; color: #64748b; margin-top: 6px; }
+.page-header .badge {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 4px 14px;
+  background: var(--bordeaux-700);
+  color: white;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.mockup-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 32px;
+  padding: 20px 20px 60px;
+}
+.screen-label {
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: #475569;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.screen-label .sub {
+  font-weight: 400;
+  color: #94a3b8;
+  text-transform: none;
+  letter-spacing: 0;
+  margin-top: 2px;
+  font-size: 12px;
+}
+
+/* Phone frame */
+.phone {
+  width: 375px;
+  height: 812px;
+  border-radius: 44px;
+  background: #000;
+  padding: 12px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.18), 0 6px 20px rgba(0,0,0,0.10);
+  position: relative;
+  flex-shrink: 0;
+}
+.phone-screen {
+  width: 100%;
+  height: 100%;
+  border-radius: 32px;
+  overflow: hidden;
+  position: relative;
+}
+.phone-screen.light { background: #f8fafc; color: #0f172a; }
+.phone-screen.dark { background: #0f172a; color: #e2e8f0; }
+
+/* Notch */
+.notch {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 30px;
+  background: #000;
+  border-radius: 0 0 18px 18px;
+  z-index: 50;
+}
+.status-bar {
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  font-size: 14px;
+  font-weight: 600;
+  position: relative;
+  z-index: 40;
+}
+.light .status-bar { color: #0f172a; }
+.dark .status-bar { color: #e2e8f0; }
+.status-bar .icons { display: flex; gap: 5px; align-items: center; }
+.battery { width: 24px; height: 12px; border: 1.5px solid currentColor; border-radius: 3px; position: relative; }
+.battery::after { content: ''; position: absolute; right: -3px; top: 3px; width: 2px; height: 4px; background: currentColor; border-radius: 0 1px 1px 0; }
+.battery::before { content: ''; position: absolute; left: 1px; top: 1px; bottom: 1px; width: 75%; background: currentColor; border-radius: 1px; }
+.wifi { width: 15px; height: 11px; position: relative; }
+.wifi span { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); border: 1.5px solid currentColor; border-bottom: none; border-radius: 50% 50% 0 0; }
+.wifi span:nth-child(1) { width: 14px; height: 7px; }
+.wifi span:nth-child(2) { width: 9px; height: 5px; opacity: 0.7; }
+.wifi span:nth-child(3) { width: 4px; height: 2px; opacity: 0.5; }
+.signal { display: flex; align-items: flex-end; gap: 1.5px; }
+.signal span { width: 3px; background: currentColor; border-radius: 1px; }
+.signal span:nth-child(1) { height: 4px; }
+.signal span:nth-child(2) { height: 6px; }
+.signal span:nth-child(3) { height: 9px; }
+.signal span:nth-child(4) { height: 11px; }
+
+/* Scrollable content area */
+.content { height: calc(100% - 44px); overflow: hidden; position: relative; }
+
+/* Common elements */
+.bordeaux-bg { background: var(--bordeaux-700); }
+.bordeaux-grad { background: linear-gradient(135deg, var(--bordeaux-700), var(--bordeaux-600)); }
+.bordeaux-text { color: var(--bordeaux-700); }
+.dark .bordeaux-text { color: var(--bordeaux-400); }
+.bordeaux-50 { background: var(--bordeaux-50); }
+.dark .bordeaux-50 { background: var(--bordeaux-950); opacity: 0.4; }
+
+/* ============ SCREEN 1: Welcome ============ */
+.welcome-container { display: flex; flex-direction: column; height: 100%; padding: 0 20px; }
+.welcome-header { display: flex; justify-content: space-between; align-items: center; padding: 8px 0 16px; }
+.welcome-header .logo-wrap { display: flex; align-items: center; gap: 10px; }
+.logo-square { width: 36px; height: 36px; border-radius: 9px; bordeaux-bg: var(--bordeaux-700); }
+.logo-square { background: var(--bordeaux-700); border-radius: 9px; display: flex; align-items: center; justify-content: center; }
+.logo-square span { color: white; font-weight: 700; font-size: 16px; font-family: serif; }
+.brand-name { font-size: 17px; font-weight: 700; }
+.brand-name .ai { color: var(--bordeaux-700); }
+.dark .brand-name .ai { color: var(--bordeaux-400); }
+.avatar-circle { width: 34px; height: 34px; border-radius: 50%; background: var(--bordeaux-100); display: flex; align-items: center; justify-content: center; }
+.dark .avatar-circle { background: var(--bordeaux-950); }
+.avatar-circle svg { width: 16px; height: 16px; color: var(--bordeaux-600); }
+.dark .avatar-circle svg { color: var(--bordeaux-400); }
+
+.welcome-hero { padding: 24px 0 28px; }
+.welcome-icon-box { width: 56px; height: 56px; border-radius: 16px; bordeaux-grad: 1; background: linear-gradient(135deg, var(--bordeaux-700), var(--bordeaux-600)); display: flex; align-items: center; justify-content: center; margin-bottom: 16px; box-shadow: 0 8px 24px rgba(139,26,43,0.25); }
+.welcome-icon-box svg { color: white; }
+.welcome-hero h2 { font-size: 24px; font-weight: 700; line-height: 1.25; margin-bottom: 8px; }
+.welcome-hero p { font-size: 15px; color: #64748b; line-height: 1.5; }
+.dark .welcome-hero p { color: #94a3b8; }
+
+.suggestions-label { font-size: 13px; font-weight: 600; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
+.suggestion-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; flex: 1; overflow: hidden; }
+.suggestion-card { background: white; border: 1px solid #e2e8f0; border-radius: 14px; padding: 14px; display: flex; flex-direction: column; gap: 8px; transition: border-color 0.2s; }
+.dark .suggestion-card { background: #1e293b; border-color: #334155; }
+.suggestion-card .icon-box { width: 34px; height: 34px; border-radius: 9px; background: var(--bordeaux-50); display: flex; align-items: center; justify-content: center; }
+.dark .suggestion-card .icon-box { background: var(--bordeaux-950); opacity: 1; }
+.suggestion-card .icon-box svg { color: var(--bordeaux-600); width: 17px; height: 17px; }
+.dark .suggestion-card .icon-box svg { color: var(--bordeaux-400); }
+.suggestion-card p { font-size: 12px; line-height: 1.4; color: #475569; }
+.dark .suggestion-card p { color: #cbd5e1; }
+
+.input-bar { padding: 12px 0 20px; }
+.input-pill { display: flex; align-items: center; gap: 10px; background: white; border: 1px solid #e2e8f0; border-radius: 18px; padding: 10px 12px; }
+.dark .input-pill { background: #1e293b; border-color: #334155; }
+.input-pill .text { flex: 1; font-size: 14px; color: #94a3b8; }
+.send-btn { width: 36px; height: 36px; border-radius: 12px; background: var(--bordeaux-700); display: flex; align-items: center; justify-content: center; }
+.send-btn svg { color: white; width: 17px; height: 17px; }
+.disclaimer { text-align: center; font-size: 11px; color: #94a3b8; margin-top: 8px; line-height: 1.4; }
+
+/* ============ SCREEN 2: Chat conversation ============ */
+.chat-container { display: flex; flex-direction: column; height: 100%; }
+.chat-header { display: flex; align-items: center; gap: 10px; padding: 6px 20px 12px; border-bottom: 1px solid #e2e8f0; }
+.dark .chat-header { border-color: #1e293b; }
+.chat-header .burger { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; }
+.chat-header .burger svg { color: #64748b; }
+.chat-header h3 { font-size: 16px; font-weight: 600; flex: 1; }
+.chat-header .ds-chip { display: flex; align-items: center; gap: 5px; background: #f1f5f9; border-radius: 8px; padding: 5px 10px; font-size: 11px; font-weight: 500; color: #64748b; }
+.dark .chat-header .ds-chip { background: #1e293b; color: #94a3b8; }
+.chat-header .ds-chip .dot { width: 6px; height: 6px; border-radius: 50%; background: #10b981; }
+
+.chat-body { flex: 1; overflow: hidden; padding: 16px 20px; display: flex; flex-direction: column; gap: 16px; }
+.user-bubble { align-self: flex-end; max-width: 80%; background: var(--bordeaux-700); color: white; border-radius: 18px 18px 4px 18px; padding: 12px 16px; font-size: 14px; line-height: 1.45; }
+.assistant-msg { display: flex; gap: 10px; }
+.assistant-avatar { width: 32px; height: 32px; border-radius: 9px; background: linear-gradient(135deg, var(--bordeaux-700), var(--bordeaux-600)); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.assistant-avatar svg { color: white; width: 16px; height: 16px; }
+.assistant-body { flex: 1; min-width: 0; }
+.assistant-body .name { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+.assistant-body .text { font-size: 14px; line-height: 1.5; margin-bottom: 10px; }
+.explain-box { background: var(--bordeaux-50); border: 1px solid var(--bordeaux-100); border-radius: 12px; padding: 12px; margin-bottom: 10px; }
+.dark .explain-box { background: var(--bordeaux-950); border-color: var(--bordeaux-900); opacity: 1; }
+.explain-box p { font-size: 12px; color: #64748b; line-height: 1.5; }
+.dark .explain-box p { color: #94a3b8; }
+
+.tabs-row { display: flex; border-bottom: 1px solid #e2e8f0; margin-bottom: 10px; }
+.dark .tabs-row { border-color: #334155; }
+.tab { padding: 8px 14px; font-size: 12px; font-weight: 600; border-bottom: 2px solid transparent; color: #94a3b8; display: flex; align-items: center; gap: 5px; }
+.tab svg { width: 13px; height: 13px; }
+.tab.active { border-color: var(--bordeaux-500); color: var(--bordeaux-700); }
+.dark .tab.active { color: var(--bordeaux-400); }
+
+.result-table { border: 1px solid #e2e8f0; border-radius: 10px; overflow: hidden; }
+.dark .result-table { border-color: #334155; }
+.result-table table { width: 100%; font-size: 11px; border-collapse: collapse; }
+.result-table th { background: #f8fafc; padding: 7px 10px; text-align: left; font-weight: 600; color: #64748b; font-size: 10px; text-transform: uppercase; letter-spacing: 0.3px; white-space: nowrap; }
+.dark .result-table th { background: #1e293b; color: #94a3b8; }
+.result-table td { padding: 7px 10px; border-top: 1px solid #f1f5f9; color: #475569; white-space: nowrap; }
+.dark .result-table td { border-color: #1e293b; color: #cbd5e1; }
+.result-table .scroll-hint { text-align: center; padding: 6px; font-size: 10px; color: #94a3b8; background: #f8fafc; }
+.dark .result-table .scroll-hint { background: #1e293b; }
+
+.actions-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+.action-btn { display: flex; align-items: center; gap: 4px; padding: 5px 10px; border-radius: 8px; font-size: 11px; font-weight: 500; color: #64748b; background: #f1f5f9; }
+.dark .action-btn { background: #1e293b; color: #94a3b8; }
+.action-btn svg { width: 13px; height: 13px; }
+
+.followups { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+.followup-chip { padding: 6px 12px; border-radius: 16px; border: 1px solid #e2e8f0; background: white; font-size: 12px; color: #64748b; }
+.dark .followup-chip { border-color: #334155; background: #1e293b; color: #cbd5e1; }
+
+/* ============ SCREEN 3: Loading ============ */
+.loading-list { display: flex; flex-direction: column; gap: 10px; margin-top: 4px; }
+.loading-step { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #64748b; }
+.dark .loading-step { color: #94a3b8; }
+.loading-step .spinner { width: 16px; height: 16px; border: 2px solid var(--bordeaux-500); border-top-color: transparent; border-radius: 50%; animation: spin 0.8s linear infinite; }
+.loading-step .check { width: 16px; height: 16px; color: #10b981; }
+.loading-step .pending { width: 16px; height: 16px; border: 1.5px solid #cbd5e1; border-radius: 50%; }
+.dark .loading-step .pending { border-color: #334155; }
+.loading-step.active { color: #0f172a; font-weight: 500; }
+.dark .loading-step.active { color: #e2e8f0; }
+.loading-step.done { opacity: 0.6; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ============ SCREEN 4: Sidebar / Drawer ============ */
+.drawer-overlay { position: absolute; inset: 0; background: rgba(15,23,42,0.5); z-index: 30; }
+.drawer { position: absolute; top: 0; left: 0; width: 300px; height: 100%; background: white; z-index: 31; display: flex; flex-direction: column; box-shadow: 4px 0 30px rgba(0,0,0,0.15); }
+.dark .drawer { background: #0f172a; }
+.drawer-header { padding: 16px 16px 12px; display: flex; align-items: center; justify-content: space-between; }
+.drawer-header .logo-wrap { display: flex; align-items: center; gap: 10px; }
+.drawer-header .close-btn { width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; }
+.drawer-header .close-btn svg { color: #94a3b8; }
+.new-chat-btn { margin: 0 16px 12px; padding: 11px; border-radius: 12px; background: var(--bordeaux-700); color: white; font-size: 14px; font-weight: 500; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.search-bar { margin: 0 16px 12px; position: relative; }
+.search-bar svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #94a3b8; width: 15px; height: 15px; }
+.search-bar input { width: 100%; padding: 9px 12px 9px 34px; border-radius: 10px; border: 1px solid #e2e8f0; background: #f8fafc; font-size: 13px; color: #475569; }
+.dark .search-bar input { background: #1e293b; border-color: #334155; color: #cbd5e1; }
+
+.history-scroll { flex: 1; overflow: hidden; padding: 0 16px; }
+.history-section-label { font-size: 11px; font-weight: 600; color: #f59e0b; text-transform: uppercase; letter-spacing: 0.5px; padding: 8px 4px; display: flex; align-items: center; gap: 6px; }
+.history-section-label.regular { color: #94a3b8; }
+.history-item { display: flex; align-items: center; gap: 8px; padding: 8px; border-radius: 8px; margin-bottom: 2px; }
+.history-item .star { color: #f59e0b; flex-shrink: 0; }
+.history-item .msg-icon { color: #cbd5e1; flex-shrink: 0; }
+.dark .history-item .msg-icon { color: #475569; }
+.history-item .title { flex: 1; font-size: 13px; color: #475569; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dark .history-item .title { color: #cbd5e1; }
+.history-item .actions { display: flex; gap: 2px; opacity: 0; }
+.history-item:hover .actions { opacity: 1; }
+.history-item .actions svg { width: 13px; height: 13px; color: #94a3b8; }
+.history-item.active { background: var(--bordeaux-50); }
+.dark .history-item.active { background: var(--bordeaux-950); opacity: 1; }
+.history-item.active .title { color: var(--bordeaux-700); font-weight: 500; }
+.dark .history-item.active .title { color: var(--bordeaux-400); }
+.history-group-label { font-size: 11px; font-weight: 500; color: #94a3b8; padding: 8px 4px 4px; }
+
+/* ============ SCREEN 5: Profile ============ */
+.profile-container { display: flex; flex-direction: column; height: 100%; overflow: hidden; }
+.profile-header { display: flex; align-items: center; gap: 10px; padding: 6px 20px 12px; }
+.profile-header .back-btn { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; }
+.profile-header .back-btn svg { color: #64748b; }
+.profile-header h3 { font-size: 18px; font-weight: 700; }
+.profile-body { flex: 1; overflow: hidden; padding: 0 20px 20px; }
+.profile-card { background: white; border: 1px solid #e2e8f0; border-radius: 14px; padding: 18px; margin-bottom: 12px; display: flex; gap: 14px; }
+.dark .profile-card { background: #1e293b; border-color: #334155; }
+.profile-avatar { width: 60px; height: 60px; border-radius: 50%; background: var(--boraux-700); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.profile-avatar { background: var(--bordeaux-700); }
+.profile-avatar svg { color: white; }
+.profile-card .info h4 { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
+.profile-card .info .row { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #64748b; margin-bottom: 3px; }
+.dark .profile-card .info .row { color: #94a3b8; }
+.profile-card .info .row svg { width: 13px; height: 13px; color: #cbd5e1; }
+.profile-card .edit-btn { align-self: flex-start; padding: 7px 12px; border-radius: 8px; background: #f1f5f9; font-size: 12px; font-weight: 500; color: #475569; display: flex; align-items: center; gap: 5px; }
+.dark .profile-card .edit-btn { background: #334155; color: #cbd5e1; }
+.profile-card .edit-btn svg { width: 13px; height: 13px; }
+
+.setting-card { background: white; border: 1px solid #e2e8f0; border-radius: 14px; padding: 16px 18px; margin-bottom: 12px; }
+.dark .setting-card { background: #1e293b; border-color: #334155; }
+.setting-card .card-title { font-size: 14px; font-weight: 600; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.setting-card .card-title svg { color: var(--bordeaux-500); width: 16px; height: 16px; }
+.theme-row { display: flex; gap: 8px; }
+.theme-btn { flex: 1; padding: 9px; border-radius: 10px; font-size: 12px; font-weight: 500; display: flex; align-items: center; justify-content: center; gap: 5px; background: #f1f5f9; color: #64748b; }
+.dark .theme-btn { background: #334155; color: #94a3b8; }
+.theme-btn.active { background: var(--bordeaux-700); color: white; }
+.theme-btn svg { width: 14px; height: 14px; }
+
+.lang-row { display: flex; gap: 8px; }
+.lang-btn { flex: 1; padding: 9px; border-radius: 10px; font-size: 13px; font-weight: 500; text-align: center; background: #f1f5f9; color: #64748b; }
+.dark .lang-btn { background: #334155; color: #94a3b8; }
+.lang-btn.active { background: var(--bordeaux-700); color: white; }
+
+.pref-row { display: flex; align-items: center; justify-content: space-between; padding: 8px 0; }
+.pref-row:not(:last-child) { border-bottom: 1px solid #f1f5f9; }
+.dark .pref-row:not(:last-child) { border-color: #334155; }
+.pref-row .label { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #475569; }
+.dark .pref-row .label { color: #cbd5e1; }
+.pref-row .label svg { color: #94a3b8; width: 15px; height: 15px; }
+.pref-row .select { font-size: 12px; color: #64748b; background: #f1f5f9; padding: 5px 10px; border-radius: 8px; }
+.dark .pref-row .select { background: #334155; color: #94a3b8; }
+.toggle { width: 40px; height: 24px; border-radius: 12px; background: var(--bordeaux-500); position: relative; }
+.toggle::after { content: ''; position: absolute; top: 2px; left: 18px; width: 20px; height: 20px; border-radius: 50%; background: white; transition: 0.2s; }
+.toggle.off { background: #cbd5e1; }
+.toggle.off::after { left: 2px; }
+.dark .toggle.off { background: #334155; }
+
+.logout-btn { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; border-radius: 12px; border: 1.5px solid #fca5a5; color: #ef4444; font-size: 14px; font-weight: 500; background: transparent; margin-top: 8px; }
+.dark .logout-btn { border-color: #7f1d1d; }
+
+/* ============ SCREEN 6: Data Sources ============ */
+.ds-container { display: flex; flex-direction: column; height: 100%; overflow: hidden; }
+.ds-header { display: flex; align-items: center; gap: 10px; padding: 6px 20px 12px; }
+.ds-header .back-btn { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; }
+.ds-header .back-btn svg { color: #64748b; }
+.ds-header h3 { font-size: 18px; font-weight: 700; }
+.ds-header p { font-size: 12px; color: #94a3b8; margin-top: 2px; }
+.ds-body { flex: 1; overflow: hidden; padding: 0 20px 20px; }
+.ds-card { background: white; border: 1px solid #e2e8f0; border-radius: 14px; overflow: hidden; margin-bottom: 12px; }
+.dark .ds-card { background: #1e293b; border-color: #334155; }
+.ds-card-header { display: flex; align-items: center; gap: 12px; padding: 14px; }
+.ds-card-icon { width: 40px; height: 40px; border-radius: 11px; background: #ecfdf5; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.dark .ds-card-icon { background: #064e3b; }
+.ds-card-icon svg { color: #10b981; }
+.ds-card-info { flex: 1; min-width: 0; }
+.ds-card-info h4 { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+.ds-card-meta { display: flex; align-items: center; gap: 10px; font-size: 11px; }
+.ds-card-meta .status { display: flex; align-items: center; gap: 4px; color: #10b981; font-weight: 500; }
+.ds-card-meta .status .dot { width: 6px; height: 6px; border-radius: 50%; background: #10b981; }
+.ds-card-meta .type { color: #94a3b8; }
+.ds-card-meta .tables { color: #94a3b8; }
+.ds-card-body { border-top: 1px solid #f1f5f9; padding: 12px 14px; }
+.dark .ds-card-body { border-color: #334155; }
+.ds-table-info { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.ds-table-info svg { color: #94a3b8; width: 14px; height: 14px; }
+.ds-table-info .name { font-size: 12px; font-weight: 500; color: #475569; }
+.dark .ds-table-info .name { color: #cbd5e1; }
+.ds-table-info .rows { font-size: 11px; color: #94a3b8; margin-left: auto; }
+.ds-col-list { display: flex; flex-wrap: wrap; gap: 4px; padding-left: 22px; }
+.ds-col-tag { font-size: 10px; font-family: 'JetBrains Mono', monospace; background: #f1f5f9; color: #64748b; padding: 2px 7px; border-radius: 5px; }
+.dark .ds-col-tag { background: #0f172a; color: #94a3b8; }
+
+/* SVG icons inline */
+.ic { display: inline-block; vertical-align: middle; }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>DataQuery AI — Maquettes Mobile</h1>
+  <p>6 écrans clés · formats clair et sombre · Université de Bourgogne Europe</p>
+  <span class="badge">Référence pour Android Studio</span>
+</div>
+
+<div class="mockup-grid">
+
+<!-- ==================== SCREEN 1: Welcome (Light) ==================== -->
+<div>
+  <div class="screen-label">Accueil — Mode Clair<div class="sub">Écran de démarrage avec suggestions</div></div>
+  <div class="phone">
+    <div class="notch"></div>
+    <div class="phone-screen light">
+      <div class="status-bar">
+        <span>9:41</span>
+        <div class="icons">
+          <div class="signal"><span></span><span></span><span></span><span></span></div>
+          <div class="wifi"><span></span><span></span><span></span></div>
+          <div class="battery"></div>
+        </div>
+      </div>
+      <div class="content">
+        <div class="welcome-container">
+          <div class="welcome-header">
+            <div class="logo-wrap">
+              <div class="logo-square"><span>uB</span></div>
+              <span class="brand-name">DataQuery <span class="ai">AI</span></span>
+            </div>
+            <div class="avatar-circle"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 22c0-4 4-6 8-6s8 2 8 6"/></svg></div>
+          </div>
+          <div class="welcome-hero">
+            <div class="welcome-icon-box"><svg class="ic" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3L12 3Z"/></svg></div>
+            <h2>Bonjour, que souhaitez-vous<br>analyser ?</h2>
+            <p>Interrogez vos données simplement,<br>en langage naturel.</p>
+          </div>
+          <div class="suggestions-label">Suggestions</div>
+          <div class="suggestion-grid">
+            <div class="suggestion-card">
+              <div class="icon-box"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+              <p>Évolution de la mortalité cardiovasculaire en France</p>
+            </div>
+            <div class="suggestion-card">
+              <div class="icon-box"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+              <p>Compare l'espérance de vie en Europe</p>
+            </div>
+            <div class="suggestion-card">
+              <div class="icon-box"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 22 16 8 14 6 2 18 6 22 18 10 16 8"/><path d="M6 22 2 18"/><path d="M18 10 14 6"/></svg></div>
+              <p>Top 5 des pays producteurs de blé</p>
+            </div>
+            <div class="suggestion-card">
+              <div class="icon-box"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 2 8 8 4 14 4 20 20 20 20 14 16 8 16 2"/><path d="M8 2 16 2"/></svg></div>
+              <p>Évolution de la production de lait depuis 2000</p>
+            </div>
+            <div class="suggestion-card">
+              <div class="icon-box"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg></div>
+              <p>Tendances sur les dix dernières années</p>
+            </div>
+            <div class="suggestion-card">
+              <div class="icon-box"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5.45 5.11 12 2l6.55 3.11A2 2 0 0 1 20 7v10a2 2 0 0 1-1.45 1.89L12 22l-6.55-3.11A2 2 0 0 1 4 17V7a2 2 0 0 1 1.45-1.89Z"/><path d="M8 12 12 16 16 12"/></svg></div>
+              <p>Quels pays ont les valeurs les plus élevées ?</p>
+            </div>
+          </div>
+          <div class="input-bar">
+            <div class="input-pill">
+              <span class="text">Posez une question sur vos données…</span>
+              <div class="send-btn"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg></div>
+            </div>
+            <p class="disclaimer">DataQuery AI génère des requêtes approximatives. Vérifiez le SQL avant exécution.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== SCREEN 2: Chat Conversation (Light) ==================== -->
+<div>
+  <div class="screen-label">Conversation — Mode Clair<div class="sub">Question, réponse avec onglets et actions</div></div>
+  <div class="phone">
+    <div class="notch"></div>
+    <div class="phone-screen light">
+      <div class="status-bar">
+        <span>9:41</span>
+        <div class="icons">
+          <div class="signal"><span></span><span></span><span></span><span></span></div>
+          <div class="wifi"><span></span><span></span><span></span></div>
+          <div class="battery"></div>
+        </div>
+      </div>
+      <div class="content">
+        <div class="chat-container">
+          <div class="chat-header">
+            <div class="burger"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></div>
+            <h3>DataQuery <span class="bordeaux-text">AI</span></h3>
+            <div class="ds-chip"><div class="dot"></div> PostgreSQL</div>
+          </div>
+          <div class="chat-body">
+            <div class="user-bubble">Évolution de la mortalité cardiovasculaire en France</div>
+            <div class="assistant-msg">
+              <div class="assistant-avatar"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3L12 3Z"/></svg></div>
+              <div class="assistant-body">
+                <div class="name">DataQuery AI <span style="font-size:10px;color:#94a3b8;font-weight:400;margin-left:6px">0.42s</span></div>
+                <div class="text">Voici l'évolution de la mortalité cardiovasculaire en France (2014–2023).</div>
+                <div class="explain-box"><p>Les données montrent une baisse régulière du taux de mortalité, avec une légère remontée en 2020.</p></div>
+                <div class="tabs-row">
+                  <div class="tab active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg> Résultat</div>
+                  <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><rect x="7" y="10" width="3" height="8"/><rect x="12" y="6" width="3" height="12"/><rect x="17" y="13" width="3" height="5"/></svg> Graphique</div>
+                  <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></svg> SQL</div>
+                </div>
+                <div class="result-table">
+                  <table>
+                    <thead><tr><th>Année</th><th>Taux</th><th>Décès</th></tr></thead>
+                    <tbody>
+                      <tr><td>2014</td><td>142.3</td><td>142 500</td></tr>
+                      <tr><td>2015</td><td>138.7</td><td>139 800</td></tr>
+                      <tr><td>2016</td><td>135.2</td><td>136 200</td></tr>
+                      <tr><td>2017</td><td>132.5</td><td>133 400</td></tr>
+                      <tr><td>2018</td><td>129.8</td><td>130 900</td></tr>
+                    </tbody>
+                  </table>
+                  <div class="scroll-hint">← Faire défiler pour plus →</div>
+                </div>
+                <div class="actions-row">
+                  <div class="action-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copier</div>
+                  <div class="action-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> CSV</div>
+                  <div class="action-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg> Régénérer</div>
+                  <div class="action-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 10v12M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"/></svg></div>
+                  <div class="action-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 14V2M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L12 22a3.13 3.13 0 0 1-3-3.88Z"/></svg></div>
+                </div>
+                <div class="followups">
+                  <div class="followup-chip">Compare avec l'Europe</div>
+                  <div class="followup-chip">Tendance chez les femmes ?</div>
+                  <div class="followup-chip">Par tranche d'âge</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="input-bar" style="padding:0 20px 16px">
+            <div class="input-pill">
+              <span class="text">Posez une question…</span>
+              <div class="send-btn"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== SCREEN 3: Loading state (Light) ==================== -->
+<div>
+  <div class="screen-label">Chargement — Mode Clair<div class="sub">Animation par étapes</div></div>
+  <div class="phone">
+    <div class="notch"></div>
+    <div class="phone-screen light">
+      <div class="status-bar">
+        <span>9:41</span>
+        <div class="icons">
+          <div class="signal"><span></span><span></span><span></span><span></span></div>
+          <div class="wifi"><span></span><span></span><span></span></div>
+          <div class="battery"></div>
+        </div>
+      </div>
+      <div class="content">
+        <div class="chat-container">
+          <div class="chat-header">
+            <div class="burger"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></div>
+            <h3>DataQuery <span class="bordeaux-text">AI</span></h3>
+            <div class="ds-chip"><div class="dot"></div> PostgreSQL</div>
+          </div>
+          <div class="chat-body">
+            <div class="user-bubble">Compare l'espérance de vie en Europe</div>
+            <div class="assistant-msg">
+              <div class="assistant-avatar"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3L12 3Z"/></svg></div>
+              <div class="assistant-body">
+                <div class="name">DataQuery AI</div>
+                <div class="loading-list">
+                  <div class="loading-step done"><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Analyse de la question…</div>
+                  <div class="loading-step done"><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Génération de la requête…</div>
+                  <div class="loading-step active"><div class="spinner"></div> Exécution…</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="input-bar" style="padding:0 20px 16px">
+            <div class="input-pill">
+              <span class="text">Posez une question…</span>
+              <div class="send-btn" style="background:#e2e8f0"><svg class="ic" style="color:#94a3b8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== SCREEN 4: Sidebar Drawer (Light) ==================== -->
+<div>
+  <div class="screen-label">Menu latéral — Mode Clair<div class="sub">Favoris, historique, recherche</div></div>
+  <div class="phone">
+    <div class="notch"></div>
+    <div class="phone-screen light">
+      <div class="status-bar">
+        <span>9:41</span>
+        <div class="icons">
+          <div class="signal"><span></span><span></span><span></span><span></span></div>
+          <div class="wifi"><span></span><span></span><span></span></div>
+          <div class="battery"></div>
+        </div>
+      </div>
+      <div class="content">
+        <div class="drawer-overlay"></div>
+        <div class="drawer">
+          <div class="drawer-header">
+            <div class="logo-wrap">
+              <div class="logo-square"><span>uB</span></div>
+              <span class="brand-name">DataQuery <span class="ai">AI</span></span>
+            </div>
+            <div class="close-btn"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+          </div>
+          <div class="new-chat-btn"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Nouvelle conversation</div>
+          <div class="search-bar">
+            <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <input type="text" placeholder="Rechercher… (Ctrl+K)" />
+          </div>
+          <div class="history-scroll">
+            <div class="history-section-label"><svg class="ic" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> Favoris</div>
+            <div class="history-item">
+              <svg class="ic star" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <span class="title">Mortalité cardiovasculaire en France</span>
+            </div>
+            <div class="history-item">
+              <svg class="ic star" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <span class="title">Évolution production de lait</span>
+            </div>
+            <div class="history-section-label regular">Historique</div>
+            <div class="history-group-label">Aujourd'hui</div>
+            <div class="history-item active">
+              <svg class="ic msg-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              <span class="title">Espérance de vie en Europe</span>
+            </div>
+            <div class="history-group-label">Hier</div>
+            <div class="history-item">
+              <svg class="ic msg-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              <span class="title">Top 5 producteurs de blé</span>
+            </div>
+            <div class="history-group-label">7 derniers jours</div>
+            <div class="history-item">
+              <svg class="ic msg-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              <span class="title">Tendances santé Europe 2014-2023</span>
+            </div>
+            <div class="history-item">
+              <svg class="ic msg-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              <span class="title">Dépenses de santé par pays</span>
+            </div>
+            <div class="history-item">
+              <svg class="ic msg-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              <span class="title">Comparaison indicateurs agricoles</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== SCREEN 5: Profile (Dark) ==================== -->
+<div>
+  <div class="screen-label">Profil — Mode Sombre<div class="sub">Informations, thème, langue, préférences</div></div>
+  <div class="phone">
+    <div class="notch"></div>
+    <div class="phone-screen dark">
+      <div class="status-bar">
+        <span>9:41</span>
+        <div class="icons">
+          <div class="signal"><span></span><span></span><span></span><span></span></div>
+          <div class="wifi"><span></span><span></span><span></span></div>
+          <div class="battery"></div>
+        </div>
+      </div>
+      <div class="content">
+        <div class="profile-container">
+          <div class="profile-header">
+            <div class="back-btn"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></div>
+            <h3>Profil</h3>
+          </div>
+          <div class="profile-body">
+            <div class="profile-card">
+              <div class="profile-avatar"><svg class="ic" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 22c0-4 4-6 8-6s8 2 8 6"/></svg></div>
+              <div class="info" style="flex:1">
+                <h4>Marie Dubois</h4>
+                <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg> marie.dubois@u-bourgogne.fr</div>
+                <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg> Étudiante Master 2 IA</div>
+                <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg> Université de Bourgogne Europe</div>
+              </div>
+              <div class="edit-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4Z"/></svg> Modifier</div>
+            </div>
+            <div class="setting-card">
+              <div class="card-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg> Mode d'affichage</div>
+              <div class="theme-row">
+                <div class="theme-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg> Clair</div>
+                <div class="theme-btn active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg> Sombre</div>
+                <div class="theme-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> Auto</div>
+              </div>
+            </div>
+            <div class="setting-card">
+              <div class="card-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Langue</div>
+              <div class="lang-row">
+                <div class="lang-btn active">Français</div>
+                <div class="lang-btn">English</div>
+              </div>
+            </div>
+            <div class="setting-card">
+              <div class="card-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></svg> Préférences</div>
+              <div class="pref-row">
+                <div class="label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></svg> Source par défaut</div>
+                <div class="select">PostgreSQL — OMS ▾</div>
+              </div>
+              <div class="pref-row">
+                <div class="label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg> Lignes par page</div>
+                <div class="select">50 ▾</div>
+              </div>
+              <div class="pref-row">
+                <div class="label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> SQL par défaut</div>
+                <div class="toggle"></div>
+              </div>
+            </div>
+            <div class="logout-btn"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg> Déconnexion</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== SCREEN 6: Data Sources (Dark) ==================== -->
+<div>
+  <div class="screen-label">Sources de données — Mode Sombre<div class="sub">Liste en lecture seule avec statut</div></div>
+  <div class="phone">
+    <div class="notch"></div>
+    <div class="phone-screen dark">
+      <div class="status-bar">
+        <span>9:41</span>
+        <div class="icons">
+          <div class="signal"><span></span><span></span><span></span><span></span></div>
+          <div class="wifi"><span></span><span></span><span></span></div>
+          <div class="battery"></div>
+        </div>
+      </div>
+      <div class="content">
+        <div class="ds-container">
+          <div class="ds-header">
+            <div class="back-btn"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></div>
+            <div>
+              <h3>Sources de données</h3>
+              <p>Vue d'ensemble des sources (lecture seule)</p>
+            </div>
+          </div>
+          <div class="ds-body">
+            <div class="ds-card">
+              <div class="ds-card-header">
+                <div class="ds-card-icon"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></svg></div>
+                <div class="ds-card-info">
+                  <h4>PostgreSQL — OMS Santé Europe</h4>
+                  <div class="ds-card-meta">
+                    <span class="status"><span class="dot"></span> Connecté</span>
+                    <span class="type">Base relationnelle</span>
+                    <span class="tables">1 table</span>
+                  </div>
+                </div>
+              </div>
+              <div class="ds-card-body">
+                <div class="ds-table-info">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>
+                  <span class="name">oms_sante_europe</span>
+                  <span class="rows">4 200 lignes</span>
+                </div>
+                <div class="ds-col-list">
+                  <span class="ds-col-tag">pays</span>
+                  <span class="ds-col-tag">annee</span>
+                  <span class="ds-col-tag">esperance_vie_h</span>
+                  <span class="ds-col-tag">taux_mortalite_cardio</span>
+                  <span class="ds-col-tag">depenses_sante_pct</span>
+                  <span class="ds-col-tag">+2 autres</span>
+                </div>
+              </div>
+            </div>
+            <div class="ds-card">
+              <div class="ds-card-header">
+                <div class="ds-card-icon"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+                <div class="ds-card-info">
+                  <h4>CSV — faostat_production.csv</h4>
+                  <div class="ds-card-meta">
+                    <span class="status"><span class="dot"></span> Connecté</span>
+                    <span class="type">CSV</span>
+                    <span class="tables">1 table</span>
+                  </div>
+                </div>
+              </div>
+              <div class="ds-card-body">
+                <div class="ds-table-info">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>
+                  <span class="name">faostat_production</span>
+                  <span class="rows">12 500 lignes</span>
+                </div>
+                <div class="ds-col-list">
+                  <span class="ds-col-tag">pays</span>
+                  <span class="ds-col-tag">annee</span>
+                  <span class="ds-col-tag">produit</span>
+                  <span class="ds-col-tag">production_tonnes</span>
+                  <span class="ds-col-tag">rendement_ha</span>
+                  <span class="ds-col-tag">+1 autre</span>
+                </div>
+              </div>
+            </div>
+            <div class="ds-card">
+              <div class="ds-card-header">
+                <div class="ds-card-icon"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5a2 2 0 0 0 2 2h1M16 3h1a2 2 0 0 1 2 2v5a2 2 0 0 0 2 2 2 2 0 0 1-2 2v5a2 2 0 0 1-2 2h-1"/></svg></div>
+                <div class="ds-card-info">
+                  <h4>JSON — faostat_trade.json</h4>
+                  <div class="ds-card-meta">
+                    <span class="status"><span class="dot"></span> Connecté</span>
+                    <span class="type">JSON</span>
+                    <span class="tables">1 table</span>
+                  </div>
+                </div>
+              </div>
+              <div class="ds-card-body">
+                <div class="ds-table-info">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>
+                  <span class="name">faostat_trade</span>
+                  <span class="rows">8 600 lignes</span>
+                </div>
+                <div class="ds-col-list">
+                  <span class="ds-col-tag">pays</span>
+                  <span class="ds-col-tag">annee</span>
+                  <span class="ds-col-tag">produit</span>
+                  <span class="ds-col-tag">export_tonnes</span>
+                  <span class="ds-col-tag">valeur_usd</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+</body>
+</html>

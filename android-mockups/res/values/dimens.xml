@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  DataQuery AI — Dimensions et espacements
+  Système d'espacement 8dp — à placer dans res/values/dimens.xml
+-->
+<resources>
+    <!-- Espacements (système 8dp) -->
+    <dimen name="spacing_xs">4dp</dimen>
+    <dimen name="spacing_sm">8dp</dimen>
+    <dimen name="spacing_md">12dp</dimen>
+    <dimen name="spacing_lg">16dp</dimen>
+    <dimen name="spacing_xl">20dp</dimen>
+    <dimen name="spacing_2xl">24dp</dimen>
+    <dimen name="spacing_3xl">32dp</dimen>
+    <dimen name="spacing_4xl">40dp</dimen>
+
+    <!-- Coins arrondis -->
+    <dimen name="radius_sm">8dp</dimen>
+    <dimen name="radius_md">10dp</dimen>
+    <dimen name="radius_lg">14dp</dimen>
+    <dimen name="radius_xl">18dp</dimen>
+    <dimen name="radius_2xl">22dp</dimen>
+    <dimen name="radius_pill">20dp</dimen>
+
+    <!-- Tailles de texte -->
+    <dimen name="text_xs">11sp</dimen>
+    <dimen name="text_sm">12sp</dimen>
+    <dimen name="text_md">13sp</dimen>
+    <dimen name="text_base">14sp</dimen>
+    <dimen name="text_lg">15sp</dimen>
+    <dimen name="text_xl">17sp</dimen>
+    <dimen name="text_2xl">20sp</dimen>
+    <dimen name="text_3xl">24sp</dimen>
+    <dimen name="text_4xl">28sp</dimen>
+
+    <!-- Tailles d'icônes -->
+    <dimen name="icon_xs">12dp</dimen>
+    <dimen name="icon_sm">14dp</dimen>
+    <dimen name="icon_md">16dp</dimen>
+    <dimen name="icon_lg">20dp</dimen>
+    <dimen name="icon_xl">24dp</dimen>
+    <dimen name="icon_2xl">28dp</dimen>
+
+    <!-- Tailles des composants -->
+    <dimen name="avatar_sm">32dp</dimen>
+    <dimen name="avatar_md">36dp</dimen>
+    <dimen name="avatar_lg">60dp</dimen>
+    <dimen name="logo_size">36dp</dimen>
+    <dimen name="send_btn_size">36dp</dimen>
+    <dimen name="touch_target">44dp</dimen>
+
+    <!-- Drawer -->
+    <dimen name="drawer_width">300dp</dimen>
+    <dimen name="status_bar_height">44dp</dimen>
+
+    <!-- Élévation -->
+    <dimen name="elevation_sm">2dp</dimen>
+    <dimen name="elevation_md">4dp</dimen>
+    <dimen name="elevation_lg">8dp</dimen>
+</resources>

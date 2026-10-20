@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  DataQuery AI — Thème et styles
+  Définir ces styles dans res/values/themes.xml de votre projet Android Studio
+  Le thème parent utilise Material3 (Material Components for Android).
+-->
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Thème principal — Mode Clair -->
+    <style name="Theme.DataQueryAI" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/bordeaux_700</item>
+        <item name="colorPrimaryVariant">@color/bordeaux_600</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/bordeaux_500</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorSurface">@color/bg_light_card</item>
+        <item name="colorOnSurface">@color/text_light_primary</item>
+        <item name="android:colorBackground">@color/bg_light</item>
+        <item name="android:textColorPrimary">@color/text_light_primary</item>
+        <item name="android:textColorSecondary">@color/text_light_secondary</item>
+        <item name="android:statusBarColor">@color/bg_light_card</item>
+        <item name="android:navigationBarColor">@color/bg_light_card</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <!-- Thème — Mode Sombre -->
+    <style name="Theme.DataQueryAI.Dark" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/bordeaux_500</item>
+        <item name="colorPrimaryVariant">@color/bordeaux_600</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/bordeaux_400</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorSurface">@color/bg_dark_card</item>
+        <item name="colorOnSurface">@color/text_dark_primary</item>
+        <item name="android:colorBackground">@color/bg_dark</item>
+        <item name="android:textColorPrimary">@color/text_dark_primary</item>
+        <item name="android:textColorSecondary">@color/text_dark_secondary</item>
+        <item name="android:statusBarColor">@color/bg_dark</item>
+        <item name="android:navigationBarColor">@color/bg_dark</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+    <!-- Texte -->
+    <style name="TextAppearance.DataQuery.Title" parent="TextAppearance.Material3.HeadlineSmall">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/text_light_primary</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.DataQuery.Subtitle" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/text_light_tertiary</item>
+    </style>
+
+    <style name="TextAppearance.DataQuery.CardTitle" parent="TextAppearance.Material3.TitleSmall">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/text_light_secondary</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.DataQuery.Label" parent="TextAppearance.Material3.LabelSmall">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/text_light_muted</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:letterSpacing">0.05</item>
+    </style>
+
+    <style name="TextAppearance.DataQuery.Body" parent="TextAppearance.Material3.BodySmall">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/text_light_secondary</item>
+        <item name="android:lineSpacingExtra">3dp</item>
+    </style>
+
+    <style name="TextAppearance.DataQuery.Caption" parent="TextAppearance.Material3.LabelSmall">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/text_light_muted</item>
+    </style>
+
+    <!-- Bouton principal bordeaux -->
+    <style name="Widget.DataQuery.Button.Primary" parent="Widget.Material3.Button">
+        <item name="backgroundTint">@color/bordeaux_700</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="cornerRadius">12dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+        <item name="android:paddingTop">11dp</item>
+        <item name="android:paddingBottom">11dp</item>
+        <item name="elevation">2dp</item>
+    </style>
+
+    <!-- Bouton secondaire (chip) -->
+    <style name="Widget.DataQuery.Button.Secondary" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:textColor">@color/text_light_secondary</item>
+        <item name="strokeColor">@color/border_light</item>
+        <item name="cornerRadius">10dp</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:paddingStart">12dp</item>
+        <item name="android:paddingEnd">12dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+    </style>
+
+    <!-- Carte -->
+    <style name="Widget.DataQuery.CardView" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardCornerRadius">14dp</item>
+        <item name="cardElevation">2dp</item>
+        <item name="cardBackgroundColor">@color/bg_light_card</item>
+        <item name="strokeColor">@color/border_light</item>
+        <item name="strokeWidth">1dp</item>
+    </style>
+
+    <!-- Carte de suggestion -->
+    <style name="Widget.DataQuery.SuggestionCard" parent="Widget.Material3.CardView.Outlined">
+        <item name="cardCornerRadius">14dp</item>
+        <item name="cardElevation">0dp</item>
+        <item name="cardBackgroundColor">@color/bg_light_card</item>
+        <item name="strokeColor">@color/border_light</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="android:padding">14dp</item>
+    </style>
+
+    <!-- Chip de suivi -->
+    <style name="Widget.DataQuery.FollowUpChip" parent="Widget.Material3.Chip.Assist">
+        <item name="chipBackgroundColor">@color/bg_light_card</item>
+        <item name="chipStrokeColor">@color/border_light</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="android:textColor">@color/text_light_secondary</item>
+        <item name="android:textSize">12sp</item>
+        <item name="chipCornerRadius">16dp</item>
+    </style>
+
+    <!-- Chip de source de données -->
+    <style name="Widget.DataQuery.DataSourceChip" parent="Widget.Material3.Chip.Assist">
+        <item name="chipBackgroundColor">@color/bg_light_chip</item>
+        <item name="android:textColor">@color/text_light_tertiary</item>
+        <item name="android:textSize">11sp</item>
+        <item name="chipCornerRadius">8dp</item>
+        <item name="chipStrokeWidth">0dp</item>
+    </style>
+
+    <!-- Champ de saisie -->
+    <style name="Widget.DataQuery.TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/bordeaux_400</item>
+        <item name="boxBackgroundColor">@color/bg_light_card</item>
+        <item name="boxCornerRadiusBottomEnd">18dp</item>
+        <item name="boxCornerRadiusBottomStart">18dp</item>
+        <item name="boxCornerRadiusTopEnd">18dp</item>
+        <item name="boxCornerRadiusTopStart">18dp</item>
+        <item name="hintTextColor">@color/text_light_muted</item>
+    </style>
+
+    <!-- Bouton d'envoi circulaire -->
+    <style name="Widget.DataQuery.SendButton">
+        <item name="android:layout_width">36dp</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:background">@drawable/bg_send_button</item>
+        <item name="android:tint">@color/white</item>
+    </style>
+
+    <!-- Avatar assistant -->
+    <style name="Widget.DataQuery.AssistantAvatar">
+        <item name="android:layout_width">32dp</item>
+        <item name="android:layout_height">32dp</item>
+        <item name="android:background">@drawable/bg_assistant_avatar</item>
+    </style>
+
+    <!-- Logo -->
+    <style name="Widget.DataQuery.LogoSquare">
+        <item name="android:layout_width">36dp</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:background">@drawable/bg_logo_square</item>
+    </style>
+
+    <!-- Bulle utilisateur -->
+    <style name="Widget.DataQuery.UserBubble">
+        <item name="android:background">@drawable/bg_user_bubble</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+    </style>
+
+    <!-- Divider entre onglets -->
+    <style name="Widget.DataQuery.TabDivider">
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/border_light</item>
+    </style>
+</resources>

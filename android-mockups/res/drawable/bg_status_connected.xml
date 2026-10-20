@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Chip de statut connecté — fond vert clair arrondi -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/success_bg_light" />
+    <corners android:radius="11dp" />
+</shape>

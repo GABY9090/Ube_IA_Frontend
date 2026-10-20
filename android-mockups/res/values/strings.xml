@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  DataQuery AI — Chaînes de caractères (FR)
+  Définir ces textes dans res/values/strings.xml de votre projet Android Studio
+-->
+<resources>
+    <string name="app_name">DataQuery AI</string>
+
+    <!-- Accueil -->
+    <string name="welcome_title">Bonjour, que souhaitez-vous analyser ?</string>
+    <string name="welcome_subtitle">Interrogez vos données simplement, en langage naturel.</string>
+    <string name="suggestions_label">Suggestions</string>
+    <string name="suggestion_cardio">Évolution de la mortalité cardiovasculaire en France</string>
+    <string name="suggestion_life">Compare l\'espérance de vie en Europe</string>
+    <string name="suggestion_wheat">Top 5 des pays producteurs de blé</string>
+    <string name="suggestion_milk">Évolution de la production de lait depuis 2000</string>
+    <string name="suggestion_trend">Tendances sur les dix dernières années</string>
+    <string name="suggestion_top">Quels pays ont les valeurs les plus élevées ?</string>
+
+    <!-- Zone de saisie -->
+    <string name="input_placeholder">Posez une question sur vos données…</string>
+    <string name="disclaimer">DataQuery AI génère des requêtes approximatives. Vérifiez le SQL avant exécution.\nEntrée pour envoyer, Maj+Entrée pour une nouvelle ligne, Ctrl+K pour rechercher.</string>
+
+    <!-- Conversation -->
+    <string name="assistant_name">DataQuery AI</string>
+    <string name="tab_result">Résultat</string>
+    <string name="tab_chart">Graphique</string>
+    <string name="tab_sql">Requête SQL</string>
+    <string name="action_copy">Copier</string>
+    <string name="action_csv">CSV</string>
+    <string name="action_excel">Excel</string>
+    <string name="action_regenerate">Régénérer</string>
+    <string name="action_copied">Copié</string>
+
+    <!-- Chargement -->
+    <string name="loading_step_1">Analyse de la question…</string>
+    <string name="loading_step_2">Génération de la requête…</string>
+    <string name="loading_step_3">Exécution…</string>
+
+    <!-- Erreurs -->
+    <string name="error_out_of_scope_title">Hors du domaine de données</string>
+    <string name="error_out_of_scope_msg">Je peux uniquement répondre à des questions sur les données. Posez une question sur la santé, l\'agriculture ou les indicateurs européens.</string>
+    <string name="error_empty_title">Aucun résultat</string>
+    <string name="error_empty_msg">La requête s\'est exécutée avec succès mais n\'a retourné aucune ligne.</string>
+    <string name="error_connection_title">Source de données indisponible</string>
+    <string name="error_connection_msg">Impossible de se connecter à la source de données. Vérifiez l\'état de la connexion.</string>
+    <string name="error_sql_title">Erreur de syntaxe SQL</string>
+    <string name="error_sql_msg">La requête contient une erreur de syntaxe. Vérifiez les noms de colonnes et de tables.</string>
+
+    <!-- Barre latérale -->
+    <string name="new_conversation">Nouvelle conversation</string>
+    <string name="search_placeholder">Rechercher… (Ctrl+K)</string>
+    <string name="favorites">Favoris</string>
+    <string name="history">Historique</string>
+    <string name="history_today">Aujourd\'hui</string>
+    <string name="history_yesterday">Hier</string>
+    <string name="history_7days">7 derniers jours</string>
+    <string name="no_results">Aucune conversation trouvée.</string>
+
+    <!-- Profil -->
+    <string name="profile_title">Profil</string>
+    <string name="profile_edit">Modifier</string>
+    <string name="profile_name">Marie Dubois</string>
+    <string name="profile_email">marie.dubois@u-bourgogne.fr</string>
+    <string name="profile_role">Étudiante Master 2 IA</string>
+    <string name="profile_university">Université de Bourgogne Europe</string>
+    <string name="appearance">Mode d\'affichage</string>
+    <string name="theme_light">Clair</string>
+    <string name="theme_dark">Sombre</string>
+    <string name="theme_auto">Auto</string>
+    <string name="language">Langue</string>
+    <string name="lang_french">Français</string>
+    <string name="lang_english">English</string>
+    <string name="preferences">Préférences</string>
+    <string name="pref_default_source">Source de données par défaut</string>
+    <string name="pref_rows_per_page">Lignes par page</string>
+    <string name="pref_show_sql">Afficher le SQL par défaut</string>
+    <string name="logout">Déconnexion</string>
+
+    <!-- Sources de données -->
+    <string name="datasources_title">Sources de données</string>
+    <string name="datasources_subtitle">Vue d\'ensemble des sources disponibles (lecture seule)</string>
+    <string name="ds_status_connected">Connecté</string>
+    <string name="ds_status_disconnected">Déconnecté</string>
+    <string name="ds_status_error">Erreur</string>
+    <string name="ds_type_relational">Base relationnelle</string>
+    <string name="ds_type_csv">CSV</string>
+    <string name="ds_type_json">JSON</string>
+
+    <!-- Noms de sources -->
+    <string name="ds_oms_name">PostgreSQL — OMS Santé Europe</string>
+    <string name="ds_faostat_csv_name">CSV — faostat_production.csv</string>
+    <string name="ds_faostat_json_name">JSON — faostat_trade.json</string>
+
+    <!-- Noms de tables -->
+    <string name="table_oms">oms_sante_europe</string>
+    <string name="table_faostat_prod">faostat_production</string>
+    <string name="table_faostat_trade">faostat_trade</string>
+
+    <!-- Questions de suivi -->
+    <string name="followup_1">Compare avec les autres pays européens</string>
+    <string name="followup_2">Quelle est la tendance chez les femmes ?</string>
+    <string name="followup_3">Affiche les données par tranche d\'âge</string>
+
+    <!-- Tableau de résultats -->
+    <string name="col_year">Année</string>
+    <string name="col_rate">Taux</string>
+    <string name="col_deaths">Décès</string>
+    <string name="scroll_hint">← Faire défiler pour plus →</string>
+</resources>

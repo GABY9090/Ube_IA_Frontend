@@ -1,0 +1,600 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ÉCRAN 6 — SOURCES DE DONNÉES
+  Liste en lecture seule des 3 sources avec statut, tables et colonnes
+
+  À placer dans: res/layout/activity_datasources.xml
+-->
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_light"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="6dp"
+        android:paddingBottom="20dp">
+
+        <!-- En-tête: retour + titre + sous-titre -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingBottom="12dp">
+
+            <ImageButton
+                android:id="@+id/ds_back"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@android:drawable/ic_media_rew"
+                android:tint="@color/text_light_tertiary"
+                tools:ignore="UseAppTint" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/datasources_title"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_light_primary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="@string/datasources_subtitle"
+                    android:textSize="12sp"
+                    android:textColor="@color/text_light_muted" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Source 1: PostgreSQL — OMS Santé Europe -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="14dp"
+            app:cardElevation="2dp"
+            app:cardBackgroundColor="@color/bg_light_card"
+            app:strokeColor="@color/border_light"
+            app:strokeWidth="1dp"
+            android:layout_marginBottom="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- En-tête de carte -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="14dp">
+
+                    <!-- Icône de source (base de données) -->
+                    <FrameLayout
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/bg_status_connected">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center"
+                            android:src="@android:drawable/ic_menu_save"
+                            android:tint="@color/success"
+                            tools:ignore="UseAppTint" />
+                    </FrameLayout>
+
+                    <!-- Informations -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="12dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/ds_oms_name"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/text_light_primary"
+                            android:layout_marginBottom="4dp" />
+
+                        <!-- Métadonnées: statut + type + tables -->
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+
+                            <!-- Statut connecté -->
+                            <View
+                                android:layout_width="6dp"
+                                android:layout_height="6dp"
+                                android:layout_marginEnd="4dp"
+                                android:background="@drawable/bg_status_connected" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/ds_status_connected"
+                                android:textSize="11sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/success"
+                                android:layout_marginEnd="10dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/ds_type_relational"
+                                android:textSize="11sp"
+                                android:textColor="@color/text_light_muted"
+                                android:layout_marginEnd="10dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="1 table"
+                                android:textSize="11sp"
+                                android:textColor="@color/text_light_muted" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Corps: table et colonnes -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="14dp"
+                    android:background="@color/border_light_subtle">
+
+                    <!-- Nom de la table -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="8dp">
+
+                        <ImageView
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
+                            android:layout_marginEnd="8dp"
+                            android:src="@android:drawable/ic_menu_agenda"
+                            android:tint="@color/text_light_muted"
+                            tools:ignore="UseAppTint" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/table_oms"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/text_light_secondary" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="4 200 lignes"
+                            android:textSize="11sp"
+                            android:textColor="@color/text_light_muted" />
+                    </LinearLayout>
+
+                    <!-- Tags de colonnes -->
+                    <com.google.android.material.chip.ChipGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="22dp"
+                        app:chipSpacingHorizontal="4dp"
+                        app:chipSpacingVertical="4dp"
+                        app:singleLine="false">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_ds_chip"
+                            android:paddingStart="7dp"
+                            android:paddingEnd="7dp"
+                            android:paddingTop="2dp"
+                            android:paddingBottom="2dp"
+                            android:text="pays"
+                            android:textSize="10sp"
+                            android:fontFamily="monospace"
+                            android:textColor="@color/text_light_tertiary" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_ds_chip"
+                            android:paddingStart="7dp"
+                            android:paddingEnd="7dp"
+                            android:paddingTop="2dp"
+                            android:paddingBottom="2dp"
+                            android:text="annee"
+                            android:textSize="10sp"
+                            android:fontFamily="monospace"
+                            android:textColor="@color/text_light_tertiary" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_ds_chip"
+                            android:paddingStart="7dp"
+                            android:paddingEnd="7dp"
+                            android:paddingTop="2dp"
+                            android:paddingBottom="2dp"
+                            android:text="esperance_vie_h"
+                            android:textSize="10sp"
+                            android:fontFamily="monospace"
+                            android:textColor="@color/text_light_tertiary" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_ds_chip"
+                            android:paddingStart="7dp"
+                            android:paddingEnd="7dp"
+                            android:paddingTop="2dp"
+                            android:paddingBottom="2dp"
+                            android:text="taux_mortalite_cardio"
+                            android:textSize="10sp"
+                            android:fontFamily="monospace"
+                            android:textColor="@color/text_light_tertiary" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_ds_chip"
+                            android:paddingStart="7dp"
+                            android:paddingEnd="7dp"
+                            android:paddingTop="2dp"
+                            android:paddingBottom="2dp"
+                            android:text="depenses_sante_pct"
+                            android:textSize="10sp"
+                            android:fontFamily="monospace"
+                            android:textColor="@color/text_light_tertiary" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_ds_chip"
+                            android:paddingStart="7dp"
+                            android:paddingEnd="7dp"
+                            android:paddingTop="2dp"
+                            android:paddingBottom="2dp"
+                            android:text="+2 autres"
+                            android:textSize="10sp"
+                            android:textColor="@color/text_light_muted" />
+                    </com.google.android.material.chip.ChipGroup>
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Source 2: CSV — faostat_production.csv -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="14dp"
+            app:cardElevation="2dp"
+            app:cardBackgroundColor="@color/bg_light_card"
+            app:strokeColor="@color/border_light"
+            app:strokeWidth="1dp"
+            android:layout_marginBottom="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="14dp">
+
+                    <FrameLayout
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/bg_status_connected">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center"
+                            android:src="@android:drawable/ic_menu_save"
+                            android:tint="@color/success"
+                            tools:ignore="UseAppTint" />
+                    </FrameLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="12dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/ds_faostat_csv_name"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/text_light_primary"
+                            android:layout_marginBottom="4dp" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+
+                            <View
+                                android:layout_width="6dp"
+                                android:layout_height="6dp"
+                                android:layout_marginEnd="4dp"
+                                android:background="@drawable/bg_status_connected" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/ds_status_connected"
+                                android:textSize="11sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/success"
+                                android:layout_marginEnd="10dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/ds_type_csv"
+                                android:textSize="11sp"
+                                android:textColor="@color/text_light_muted"
+                                android:layout_marginEnd="10dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="1 table"
+                                android:textSize="11sp"
+                                android:textColor="@color/text_light_muted" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="14dp"
+                    android:background="@color/border_light_subtle">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="8dp">
+
+                        <ImageView
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
+                            android:layout_marginEnd="8dp"
+                            android:src="@android:drawable/ic_menu_agenda"
+                            android:tint="@color/text_light_muted"
+                            tools:ignore="UseAppTint" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/table_faostat_prod"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/text_light_secondary" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="12 500 lignes"
+                            android:textSize="11sp"
+                            android:textColor="@color/text_light_muted" />
+                    </LinearLayout>
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="22dp"
+                        app:chipSpacingHorizontal="4dp"
+                        app:chipSpacingVertical="4dp">
+
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/bg_ds_chip" android:paddingStart="7dp" android:paddingEnd="7dp" android:paddingTop="2dp" android:paddingBottom="2dp" android:text="pays" android:textSize="10sp" android:fontFamily="monospace" android:textColor="@color/text_light_tertiary" />
+
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/bg_ds_chip" android:paddingStart="7dp" android:paddingEnd="7dp" android:paddingTop="2dp" android:paddingBottom="2dp" android:text="annee" android:textSize="10sp" android:fontFamily="monospace" android:textColor="@color/text_light_tertiary" />
+
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/bg_ds_chip" android:paddingStart="7dp" android:paddingEnd="7dp" android:paddingTop="2dp" android:paddingBottom="2dp" android:text="produit" android:textSize="10sp" android:fontFamily="monospace" android:textColor="@color/text_light_tertiary" />
+
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/bg_ds_chip" android:paddingStart="7dp" android:paddingEnd="7dp" android:paddingTop="2dp" android:paddingBottom="2dp" android:text="production_tonnes" android:textSize="10sp" android:fontFamily="monospace" android:textColor="@color/text_light_tertiary" />
+
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/bg_ds_chip" android:paddingStart="7dp" android:paddingEnd="7dp" android:paddingTop="2dp" android:paddingBottom="2dp" android:text="rendement_ha" android:textSize="10sp" android:fontFamily="monospace" android:textColor="@color/text_light_tertiary" />
+
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/bg_ds_chip" android:paddingStart="7dp" android:paddingEnd="7dp" android:paddingTop="2dp" android:paddingBottom="2dp" android:text="+1 autre" android:textSize="10sp" android:textColor="@color/text_light_muted" />
+                    </com.google.android.material.chip.ChipGroup>
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Source 3: JSON — faostat_trade.json -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="14dp"
+            app:cardElevation="2dp"
+            app:cardBackgroundColor="@color/bg_light_card"
+            app:strokeColor="@color/border_light"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="14dp">
+
+                    <FrameLayout
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/bg_status_connected">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center"
+                            android:src="@android:drawable/ic_menu_save"
+                            android:tint="@color/success"
+                            tools:ignore="UseAppTint" />
+                    </FrameLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="12dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/ds_faostat_json_name"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/text_light_primary"
+                            android:layout_marginBottom="4dp" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+
+                            <View
+                                android:layout_width="6dp"
+                                android:layout_height="6dp"
+                                android:layout_marginEnd="4dp"
+                                android:background="@drawable/bg_status_connected" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/ds_status_connected"
+                                android:textSize="11sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/success"
+                                android:layout_marginEnd="10dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/ds_type_json"
+                                android:textSize="11sp"
+                                android:textColor="@color/text_light_muted"
+                                android:layout_marginEnd="10dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="1 table"
+                                android:textSize="11sp"
+                                android:textColor="@color/text_light_muted" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="14dp"
+                    android:background="@color/border_light_subtle">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="8dp">
+
+                        <ImageView
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
+                            android:layout_marginEnd="8dp"
+                            android:src="@android:drawable/ic_menu_agenda"
+                            android:tint="@color/text_light_muted"
+                            tools:ignore="UseAppTint" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/table_faostat_trade"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/text_light_secondary" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="8 600 lignes"
+                            android:textSize="11sp"
+                            android:textColor="@color/text_light_muted" />
+                    </LinearLayout>
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="22dp"
+                        app:chipSpacingHorizontal="4dp"
+                        app:chipSpacingVertical="4dp">
+
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/bg_ds_chip" android:paddingStart="7dp" android:paddingEnd="7dp" android:paddingTop="2dp" android:paddingBottom="2dp" android:text="pays" android:textSize="10sp" android:fontFamily="monospace" android:textColor="@color/text_light_tertiary" />
+
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/bg_ds_chip" android:paddingStart="7dp" android:paddingEnd="7dp" android:paddingTop="2dp" android:paddingBottom="2dp" android:text="annee" android:textSize="10sp" android:fontFamily="monospace" android:textColor="@color/text_light_tertiary" />
+
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/bg_ds_chip" android:paddingStart="7dp" android:paddingEnd="7dp" android:paddingTop="2dp" android:paddingBottom="2dp" android:text="produit" android:textSize="10sp" android:fontFamily="monospace" android:textColor="@color/text_light_tertiary" />
+
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/bg_ds_chip" android:paddingStart="7dp" android:paddingEnd="7dp" android:paddingTop="2dp" android:paddingBottom="2dp" android:text="export_tonnes" android:textSize="10sp" android:fontFamily="monospace" android:textColor="@color/text_light_tertiary" />
+
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/bg_ds_chip" android:paddingStart="7dp" android:paddingEnd="7dp" android:paddingTop="2dp" android:paddingBottom="2dp" android:text="valeur_usd" android:textSize="10sp" android:fontFamily="monospace" android:textColor="@color/text_light_tertiary" />
+                    </com.google.android.material.chip.ChipGroup>
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

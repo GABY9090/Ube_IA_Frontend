@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  DataQuery AI — Palette de couleurs
+  Définir ces couleurs dans res/values/colors.xml de votre projet Android Studio
+-->
+<resources>
+    <!-- Bordeaux principal -->
+    <color name="bordeaux_50">#FDF2F3</color>
+    <color name="bordeaux_100">#FCE7E9</color>
+    <color name="bordeaux_200">#F9D0D5</color>
+    <color name="bordeaux_300">#F0A8B2</color>
+    <color name="bordeaux_400">#E06A7C</color>
+    <color name="bordeaux_500">#C9374B</color>
+    <color name="bordeaux_600">#A52939</color>
+    <color name="bordeaux_700">#8B1A2B</color>
+    <color name="bordeaux_800">#721623</color>
+    <color name="bordeaux_900">#5F131E</color>
+    <color name="bordeaux_950">#3D0A13</color>
+
+    <!-- Bordeaux dégradé (pour gradients) -->
+    <color name="bordeaux_grad_start">#8B1A2B</color>
+    <color name="bordeaux_grad_end">#A52939</color>
+
+    <!-- Neutres — fond clair -->
+    <color name="bg_light">#F8FAFC</color>
+    <color name="bg_light_card">#FFFFFF</color>
+    <color name="bg_light_chip">#F1F5F9</color>
+    <color name="bg_light_input">#F8FAFC</color>
+
+    <!-- Neutres — fond sombre -->
+    <color name="bg_dark">#0F172A</color>
+    <color name="bg_dark_card">#1E293B</color>
+    <color name="bg_dark_chip">#334155</color>
+    <color name="bg_dark_input">#1E293B</color>
+
+    <!-- Texte — clair -->
+    <color name="text_light_primary">#0F172A</color>
+    <color name="text_light_secondary">#475569</color>
+    <color name="text_light_tertiary">#64748B</color>
+    <color name="text_light_muted">#94A3B8</color>
+
+    <!-- Texte — sombre -->
+    <color name="text_dark_primary">#E2E8F0</color>
+    <color name="text_dark_secondary">#CBD5E1</color>
+    <color name="text_dark_tertiary">#94A3B8</color>
+    <color name="text_dark_muted">#64748B</color>
+
+    <!-- Bordures -->
+    <color name="border_light">#E2E8F0</color>
+    <color name="border_light_subtle">#F1F5F9</color>
+    <color name="border_dark">#334155</color>
+    <color name="border_dark_subtle">#1E293B</color>
+
+    <!-- Sémantique -->
+    <color name="success">#10B981</color>
+    <color name="success_bg_light">#ECFDF5</color>
+    <color name="success_bg_dark">#064E3B</color>
+    <color name="warning">#F59E0B</color>
+    <color name="error">#EF4444</color>
+    <color name="error_border_light">#FCA5A5</color>
+    <color name="error_border_dark">#7F1D1D</color>
+    <color name="info">#2563EB</color>
+
+    <!-- Blanc -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="overlay_scrim">#800F172A</color>
+</resources>

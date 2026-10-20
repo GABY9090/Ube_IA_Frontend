@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ITEM D'HISTORIQUE — normal
+  Icône message + titre + actions (épingler, renommer, supprimer)
+
+  À placer dans: res/layout/item_history.xml
+-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp">
+
+    <!-- Étiquette de groupe (Aujourd'hui, Hier, etc.) -->
+    <TextView
+        android:id="@+id/group_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="4dp"
+        android:textSize="11sp"
+        android:textStyle="bold"
+        android:textColor="@color/text_light_muted"
+        android:visibility="gone"
+        tools:text="Aujourd'hui"
+        tools:visibility="visible" />
+
+    <!-- Item de conversation -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="?attr/selectableItemBackground"
+        android:padding="8dp"
+        android:clickable="true"
+        android:focusable="true">
+
+        <!-- Icône (étoile si favori, bulle sinon) -->
+        <ImageView
+            android:id="@+id/history_icon"
+            android:layout_width="13dp"
+            android:layout_height="13dp"
+            android:layout_marginEnd="8dp"
+            android:src="@android:drawable/sym_action_chat"
+            android:tint="@color/border_light"
+            tools:ignore="UseAppTint" />
+
+        <!-- Titre -->
+        <TextView
+            android:id="@+id/history_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="13sp"
+            android:textColor="@color/text_light_secondary"
+            android:singleLine="true"
+            android:ellipsize="end"
+            tools:text="Mortalité cardiovasculaire en France" />
+
+        <!-- Actions (épingler) -->
+        <ImageButton
+            android:id="@+id/action_pin"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/btn_star_big_off"
+            android:tint="@color/text_light_muted"
+            android:visibility="invisible"
+            tools:ignore="UseAppTint"
+            tools:visibility="visible" />
+    </LinearLayout>
+</LinearLayout>
